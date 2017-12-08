@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.5.1/snap.svg-min.js"></script>
+
+    <title>Bitmap to Drawing Machine</title>
+    <style>
+        img {
+            visibility: hidden; 
+        }
+        .canvas-container {
+            overflow: hidden;
+            height: 0;
+            width: 0;
+        }
+        .controls {
+//            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: white;
+            z-index: 100;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="controls">
+        <div class='controls-item'>
+            <label for="pointCountMultiplier">Point Multiplier</label>
+            <input id='pointCountMultiplier' type="range" min='.5' max='10'>
+        </div>
+        <div class='controls-item'>
+            <label for="resolution">Resolution</label>
+            <input id='resolution' type="range" step="0.01" min='.01' max='1'>
+        </div>
+        <div class='controls-item'>
+            <label for="svgRes">SVG Resolution</label>
+            <input id='svgRes' type="range" step="1" min='1' value='10' max='20'>
+        </div>
+    </div>
+    <div class="canvas-container">
+        <canvas id="world"></canvas>
+
+    </div>
+    <svg width='20000' height='20000' id="svg"></svg>
+    <img src="./bitmap/selfie-3.png" alt="" id="source">
+    <script src="main.js"></script>
+    <script src="shading.js"></script>
+</body>
+
+</html>
