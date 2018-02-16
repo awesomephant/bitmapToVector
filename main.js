@@ -1,18 +1,30 @@
-var c, greyscale, width, height, sourceImage;
+var c, greyscale, width, height, sourceImage, instEl, s;
 var config = {
-  greyValue: 100,
-  pointCountMultiplier: .15,
-  resolution: .08,
-  svgRes: 15,  
+  greyValue: 150,
+  pointCountMultiplier: .2,
+  resolution: .35,
+  svgRes: 25,
+  stochasticShading: false,
+  pixelScaling: 1.3, // default 1
+  RandomPixelScaling: 0,
+  RandomPixelOffset: 0
 };
-var mapRange = function(n, range, targetRange) {
+
+var getRandomInt = function (min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+var getRandomFloat = function (min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+var mapRange = function (n, range, targetRange) {
   var x =
     (n - range[0]) / (range[1] - range[0]) * (targetRange[1] - targetRange[0]) +
     targetRange[0];
   return x;
 };
 
-var drawCanvas = function(arr) {
+var drawCanvas = function (arr) {
   let imageData = c.createImageData(width * config.resolution, height * config.resolution);
   var data = imageData.data;
   for (var i = 0; i < arr.length; i++) {
@@ -21,7 +33,7 @@ var drawCanvas = function(arr) {
   c.putImageData(imageData, 0, 0);
 };
 
-var processImageData = function(data) {
+var processImageData = function (data) {
   // data is a one-dimensional array of each pixel in the image.
   //Each pixel is represented by four values: RGBA
   //So what we need to do is:
@@ -48,26 +60,32 @@ var processImageData = function(data) {
   drawCanvas(greyscaleRGBA);
 };
 
-var drawImage = function(img) {
-  c.clearRect(0,0,width, height);
-  let w = Math.round(width * config.resolution);
-  let h = Math.round(height * config.resolution);
+var drawImage = function (img, res) {
+  if (!res) {
+    res = config.resolution;
+  }
+  let w = Math.round(width * res);
+  let h = Math.round(height * res);
+  c.clearRect(0, 0, w, h);
   c.drawImage(img, 0, 0, w, h);
   let imageData = c.getImageData(0, 0, w, h);
   processImageData(imageData.data);
 };
 
-var init = function() {
+var init = function (cb) {
   let canvas = document.getElementById("world");
   sourceImage = document.getElementById("source");
+  instEl = document.getElementById("instCount");
+  s = Snap("#svg");
+
   c = canvas.getContext("2d");
   width = sourceImage.naturalWidth;
   height = sourceImage.naturalHeight;
   c.canvas.width = width;
   c.canvas.height = height;
-  drawImage(sourceImage);
   console.log(width)
   console.log(height)
+  console.log("init done")
+  cb();
 };
 
-init();

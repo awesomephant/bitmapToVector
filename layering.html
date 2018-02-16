@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-    
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.5.1/snap.svg-min.js"></script>
-        
-        <script src="main.js"></script>
-        <script src="shading.js"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.5.1/snap.svg-min.js"></script>
+
     <title>Bitmap to Drawing Machine</title>
     <style>
         img {
-            visibility: hidden; 
+            visibility: hidden;
         }
+
         .canvas-container {
             overflow: hidden;
             height: 0;
             width: 0;
         }
+
         .controls {
-//            position: fixed;
+            //            position: fixed;
             top: 1rem;
             right: 1rem;
             background: white;
@@ -50,8 +50,11 @@
 
     </div>
     <svg width='20000' height='20000' id="svg"></svg>
-    <img src="./bitmap/gradient.png" alt="" id="source">
-    <script src="drawStandard.js"></script>
+    <img src="./bitmap/feret2.jpg" alt="" id="source">
+    
+    <script src="main.js"></script>
+    <script src="shading.js"></script>
+    <script src="layering.js"></script>
 </body>
 
 </html>
